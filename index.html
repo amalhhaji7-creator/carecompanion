@@ -29,19 +29,20 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* Stable Grid Navigation */
+        /* Stable Grid Navigation Bar */
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
         .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
         .nav-btn span { font-size: 18px; }
         
-        /* Direct Layout Overrides for Active States */
+        /* Direct Action State Coloring Links */
         .nav-btn.active[data-tab="medical"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
         .nav-btn.active[data-tab="logistics"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
         .nav-btn.active[data-tab="dementia"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
         .nav-btn.active[data-tab="legacy"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
-        /* Unified Content Panels */
+        /* Unified Layout Containers */
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .panel.active { display: block !important; }
         
         h2 { font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); font-weight: 700; }
         #medical h2 { border-color: var(--accent-medical); color: var(--accent-medical); }
@@ -49,14 +50,14 @@
         #dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         #legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Detailed Input Styling */
+        /* Field Input Layouts */
         .form-group { margin-bottom: 22px; }
         .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
         .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
         textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; resize: vertical; }
         textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
         
-        /* Checklist Rows */
+        /* Interactive Checkbox Items */
         .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
         .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
         .list-item-content { flex-grow: 1; }
@@ -94,7 +95,7 @@
     </div>
 
     <!-- PANEL 1: HEALTH LOGS -->
-    <div id="medical" class="panel" style="display: block;">
+    <div id="medical" class="panel active">
         <h2>💊 Health & Daily Prescriptions</h2>
         <form onsubmit="return false;">
             <div class="form-group">
