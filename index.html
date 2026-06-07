@@ -6,7 +6,6 @@
     <title>Family Care Companion Pro</title>
     <style>
         :root {
-            /* Warm, Soothing, Caregiver-Friendly Palette */
             --bg-main: #f4f6f0;         
             --bg-card: #ffffff;         
             --bg-input: #fafafa;        
@@ -29,7 +28,7 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* The Secret Formula: Pure CSS Native State Selectors */
+        /* CSS Tab Switcher Toggles */
         .tab-state { display: none; }
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
         
@@ -38,13 +37,13 @@
 
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         
-        /* Enforced Visual Highlighting Engine */
+        /* Interactive Nav Highlighting Rules */
         #tab1:checked ~ .nav-grid label[for="tab1"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
         #tab2:checked ~ .nav-grid label[for="tab2"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
         #tab3:checked ~ .nav-grid label[for="tab3"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
         #tab4:checked ~ .nav-grid label[for="tab4"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
-        /* Enforced Panel Toggle Engine */
+        /* Panel Swapping Actions */
         #tab1:checked ~ #medical,
         #tab2:checked ~ #logistics,
         #tab3:checked ~ #dementia,
@@ -56,14 +55,15 @@
         #dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         #legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Form Inputs */
+        /* Layout Forms */
         .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
         .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
         textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; }
+        textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
         
         .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
-        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
 
         .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
         #medical .btn { background: var(--accent-medical); color: white; }
@@ -87,13 +87,13 @@
         <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This system uses native hardware execution layers, completely isolating sensitive notes from cloud data tracking.
     </div>
 
-    <!-- Hidden Core Radio Toggles to Handle Absolute Navigation States -->
+    <!-- State Controllers -->
     <input type="radio" id="tab1" name="companion-tabs" class="tab-state" checked>
     <input type="radio" id="tab2" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab3" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab4" name="companion-tabs" class="tab-state">
 
-    <!-- Active Navigation Grid Row -->
+    <!-- Active Grid Controls -->
     <div class="nav-grid">
         <label for="tab1" class="nav-label"><span>💊</span>Health Logs</label>
         <label for="tab2" class="nav-label"><span>🏡</span>Home Safety</label>
@@ -147,9 +147,7 @@
                     <div class="list-item-desc">Safely shred legacy house utility notices older than 7 years to keep filling cabinets simple.</div>
                 </div>
             </div>
-            <button type="button" class="btn" onclick="alert('✨ Home settings cataloged successfully!')">Save Home Logistics</button>
-        </form>
-    </div>
-
-    <!-- PANEL 3: GENTLE CARE -->
-    <div id="dementia" class="panel">
+            <div class="list-item">
+                <input type="checkbox" id="log_3" onchange="localStorage.setItem('log_3', this.checked)">
+                <div class="list-item-content">
+                    <div class="list-item-title">Keep-Sake Estate Tagging System</div>
