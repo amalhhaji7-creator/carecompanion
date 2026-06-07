@@ -18,30 +18,29 @@
             --border: #e2e8e4;           
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); padding: 20px 15px; font-size: 16px; line-height: 1.6; }
         .container { max-width: 750px; margin: 0 auto; padding-bottom: 60px; }
 
         header { text-align: center; margin-bottom: 25px; padding: 25px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(45,55,50,0.03); }
-        header h1 { font-size: 26px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; letter-spacing: -0.5px; }
+        header h1 { font-size: 26px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
         header p { color: var(--text-muted); font-size: 14px; font-style: italic; }
 
-        .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; line-height: 1.5; }
+        .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* Navigation Menu Layout */
+        /* Fixed Navigation Buttons Grid */
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
-        .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; }
+        .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-btn span { font-size: 18px; }
         
-        /* Direct Action Button Overrides */
+        /* Direct Layout Overrides */
         .nav-btn.active[data-tab="medical"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
         .nav-btn.active[data-tab="logistics"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
         .nav-btn.active[data-tab="dementia"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
         .nav-btn.active[data-tab="legacy"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
-        /* Panel Containers */
-        .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .panel.active { display: block !important; }
+        /* Panel Bases */
+        .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; }
         
         h2 { font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); color: var(--text-main); font-weight: 700; }
         .panel[id="medical"] h2 { border-color: var(--accent-medical); color: var(--accent-medical); }
@@ -49,32 +48,22 @@
         .panel[id="dementia"] h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         .panel[id="legacy"] h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Text Inputs */
         .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
         .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
-        input[type="text"], textarea { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; transition: all 0.2s; }
-        input:focus, textarea:focus { outline: none; border-color: var(--text-muted); background: white; }
+        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; }
         
-        /* List Layout Rows */
         .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
-        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
-        .list-item-content { flex-grow: 1; }
-        .list-item-title { font-weight: 600; font-size: 15px; color: var(--text-main); }
-        .list-item-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; cursor: pointer; }
 
-        /* Action Buttons */
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .btn:hover { opacity: 0.95; transform: translateY(-1px); }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
         .panel[id="medical"] .btn { background: var(--accent-medical); color: white; }
         .panel[id="logistics"] .btn { background: var(--accent-logistics); color: white; }
         .panel[id="dementia"] .btn { background: var(--accent-dementia); color: white; }
         .panel[id="legacy"] .btn { background: var(--accent-legacy); color: white; }
 
-        /* Storage Trays */
         .backup-tray { background: var(--bg-card); border: 1px dashed var(--border); padding: 16px; border-radius: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn-utility { background: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; }
-        .btn-utility:hover { background: #e2e8e4; }
     </style>
 </head>
 <body>
@@ -89,7 +78,7 @@
         <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This software tool runs completely locally on your machine, protecting sensitive information from the cloud while keeping logs fluid and clear.
     </div>
 
-    <!-- PURE ACTION CORE MAP -->
+    <!-- Navigation Bar Matrix -->
     <div class="nav-grid">
         <button class="nav-btn active" data-tab="medical" onclick="switchTab('medical')"><span>💊</span>Health Logs</button>
         <button class="nav-btn" data-tab="logistics" onclick="switchTab('logistics')"><span>🏡</span>Home Safety</button>
@@ -97,43 +86,91 @@
         <button class="nav-btn" data-tab="legacy" onclick="switchTab('legacy')"><span>⏳</span>Memory Vault</button>
     </div>
 
-    <!-- MODULE 1: MEDICAL -->
-    <div id="medical" class="panel active">
+    <!-- PANEL 1 -->
+    <div id="medical" class="panel" style="display: block;">
         <h2>💊 Health & Daily Prescriptions</h2>
         <form onsubmit="return false;">
             <div class="form-group">
                 <label>Daily Medications, Exact Times & Dosages</label>
-                <p>Track prescription management details cleanly for physicians or morning handoffs.</p>
-                <textarea id="meds-list" rows="5" placeholder="e.g.,&#10;• Morning (8:00 AM) with food: Donepezil 10mg&#10;• Evening (7:00 PM): Blood pressure wellness supports"></textarea>
+                <textarea id="meds-list" rows="5" placeholder="Morning: Donepezil 10mg"></textarea>
             </div>
             <div class="form-group">
                 <label>Our Care Circle Contact Log</label>
-                <p>Crucial mobile phone details or location lines you can tap into immediately in a hurry.</p>
-                <textarea id="medical-contacts" rows="3" placeholder="e.g., Dr. Aris (Neurology): 555-0199 | Local Pharmacy: 555-0234 | Neighbor Sarah: 555-9821"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Routine Vitals Tracker</label>
-                <p>Note baseline trends, sugar records, or overall mood to track well-being histories.</p>
-                <textarea id="vitals-log" rows="4" placeholder="e.g.,&#10;Monday AM: Blood Pressure 120/82 | Feeling bright and energetic today."></textarea>
+                <textarea id="medical-contacts" rows="3" placeholder="Dr. Aris: 555-0199"></textarea>
             </div>
             <button type="button" class="btn" onclick="saveData('medical')">Save Health Records</button>
         </form>
     </div>
 
-    <!-- MODULE 2: LOGISTICS -->
+    <!-- PANEL 2 -->
     <div id="logistics" class="panel">
         <h2>🏡 Household Logistics & Downsizing</h2>
         <form onsubmit="return false;">
             <div class="form-group">
                 <label>Essential House Anchors (The Scavenger Hunt)</label>
-                <p>Where are non-legal essentials kept? Save this so emergency helpers aren't searching blindly.</p>
-                <textarea id="infrastructure-map" rows="4" placeholder="e.g.,&#10;• Main Water Shut-off: Basement back wall, look for red wheel.&#10;• Spare House Keys: Key lockbox on back porch pillar (Code: 4821)&#10;• Wi-Fi Connection Details: Network: HomeWiFi / Password: familycomfort2026"></textarea>
+                <textarea id="infrastructure-map" rows="4" placeholder="Water main location..."></textarea>
             </div>
-            
-            <label style="display:block; font-size:14px; font-weight:600; margin-bottom:4px;">Transition & Sorting Checklist</label>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Track downsizing steps sequentially as you arrange or transition living setups.</p>
-            
-            <div class="list-item">
-                <input type="checkbox" id="log_1" onchange="toggleCheckbox('log_1')">
-                <div class="list-item-content">
-                    <div class="list-item-title">The Cookware & Comfort Edit</div>
+            <button type="button" class="btn" onclick="saveData('logistics')">Save Home Logistics</button>
+        </form>
+    </div>
+
+    <!-- PANEL 3 -->
+    <div id="dementia" class="panel">
+        <h2>🧠 Loving Support & Cognitive Comfort Deck</h2>
+        <form onsubmit="return false;">
+            <div class="form-group">
+                <label>Reassurance Phrases & Conversational Scripts</label>
+                <textarea id="deescalation-scripts" rows="5" placeholder="Response strategies..."></textarea>
+            </div>
+            <button type="button" class="btn" onclick="saveData('dementia')">Save Cognitive Support Notes</button>
+        </form>
+    </div>
+
+    <!-- PANEL 4 -->
+    <div id="legacy" class="panel">
+        <h2>⏳ Heartwarming Legacy & Nostalgia Vault</h2>
+        <form onsubmit="return false;">
+            <div class="form-group">
+                <label>The Sensory Comfort Palette</label>
+                <textarea id="comfort-anchors" rows="4" placeholder="Favorite music, foods, memories..."></textarea>
+            </div>
+            <button type="button" class="btn" onclick="saveData('legacy')">Save Treasured Memories</button>
+        </form>
+    </div>
+
+    <div class="backup-tray">
+        <button class="btn-utility" type="button" onclick="exportDataToJson()">📥 Backup Data File</button>
+        <button class="btn-utility" type="button" onclick="document.getElementById('import-file').click()">📤 Load File Into App</button>
+        <input type="file" id="import-file" style="display:none;" onchange="importDataFromJson(event)">
+    </div>
+</div>
+
+<script>
+    function switchTab(tabId) {
+        // Enforce hard block visibility resets natively
+        var panels = document.getElementsByClassName('panel');
+        for (var i = 0; i < panels.length; i++) {
+            panels[i].style.display = 'none';
+            panels[i].classList.remove('active');
+        }
+
+        var buttons = document.getElementsByClassName('nav-btn');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].classList.remove('active');
+        }
+
+        var targetPanel = document.getElementById(tabId);
+        if (targetPanel) {
+            targetPanel.style.display = 'block';
+            targetPanel.classList.add('active');
+        }
+
+        var targetButton = document.querySelector('.nav-btn[data-tab="' + tabId + '"]');
+        if (targetButton) {
+            targetButton.classList.add('active');
+        }
+    }
+
+    function saveData(panelType) {
+        var fields = [];
+        if(panelType === 'medical') fields = ['meds-list', 'medical-contacts'];
