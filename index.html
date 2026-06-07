@@ -6,7 +6,6 @@
     <title>Family Care Companion Pro</title>
     <style>
         :root {
-            /* Warm, Welcoming Caregiver Palette */
             --bg-main: #f4f6f0;         
             --bg-card: #ffffff;         
             --bg-input: #fafafa;        
@@ -29,42 +28,49 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* Stable Grid Navigation Bar */
+        /* THE PURE CSS FIX: Hidden radio state triggers at the absolute structural root */
+        .tab-state { display: none; }
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
-        .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
-        .nav-btn span { font-size: 18px; }
         
-        /* Direct Action State Coloring Links */
-        .nav-btn.active[data-tab="medical"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
-        .nav-btn.active[data-tab="logistics"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
-        .nav-btn.active[data-tab="dementia"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
-        .nav-btn.active[data-tab="legacy"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
+        .nav-label { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
+        .nav-label span { font-size: 18px; }
 
-        /* Unified Layout Containers */
+        /* Hide panels by default */
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .panel.active { display: block !important; }
         
+        /* The Sibling Selectors (~): Enforced Highlight Engine */
+        #tab1:checked ~ .nav-grid label[for="tab1"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
+        #tab2:checked ~ .nav-grid label[for="tab2"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
+        #tab3:checked ~ .nav-grid label[for="tab3"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
+        #tab4:checked ~ .nav-grid label[for="tab4"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
+
+        /* The Sibling Selectors (~): Enforced Panel Switch Engine */
+        #tab1:checked ~ #medical,
+        #tab2:checked ~ #logistics,
+        #tab3:checked ~ #dementia,
+        #tab4:checked ~ #legacy { display: block !important; }
+
         h2 { font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); font-weight: 700; }
         #medical h2 { border-color: var(--accent-medical); color: var(--accent-medical); }
         #logistics h2 { border-color: var(--accent-logistics); color: var(--accent-logistics); }
         #dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         #legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Field Input Layouts */
+        /* Content Forms Layout */
         .form-group { margin-bottom: 22px; }
         .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
         .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
-        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; resize: vertical; }
+        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; }
         textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
         
-        /* Interactive Checkbox Items */
+        /* Checkbox Rows */
         .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
         .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
         .list-item-content { flex-grow: 1; }
         .list-item-title { font-weight: 600; font-size: 15px; color: var(--text-main); }
         .list-item-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
 
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
         #medical .btn { background: var(--accent-medical); color: white; }
         #logistics .btn { background: var(--accent-logistics); color: white; }
         #dementia .btn { background: var(--accent-dementia); color: white; }
@@ -86,16 +92,22 @@
         <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This system uses native hardware execution layers, completely isolating sensitive notes from cloud data tracking.
     </div>
 
-    <!-- Active Navigation Row Buttons -->
+    <!-- THE ENGINE: Radio buttons MUST sit exactly here, directly above the labels and panels -->
+    <input type="radio" id="tab1" name="companion-tabs" class="tab-state" checked>
+    <input type="radio" id="tab2" name="companion-tabs" class="tab-state">
+    <input type="radio" id="tab3" name="companion-tabs" class="tab-state">
+    <input type="radio" id="tab4" name="companion-tabs" class="tab-state">
+
+    <!-- Pure CSS Navigation Row -->
     <div class="nav-grid">
-        <button type="button" class="nav-btn active" data-tab="medical" onclick="switchTab('medical')"><span>💊</span>Health Logs</button>
-        <button type="button" class="nav-btn" data-tab="logistics" onclick="switchTab('logistics')"><span>🏡</span>Home Safety</button>
-        <button type="button" class="nav-btn" data-tab="dementia" onclick="switchTab('dementia')"><span>🧠</span>Gentle Care</button>
-        <button type="button" class="nav-btn" data-tab="legacy" onclick="switchTab('legacy')"><span>⏳</span>Memory Vault</button>
+        <label for="tab1" class="nav-label"><span>💊</span>Health Logs</label>
+        <label for="tab2" class="nav-label"><span>🏡</span>Home Safety</label>
+        <label for="tab3" class="nav-label"><span>🧠</span>Gentle Care</label>
+        <label for="tab4" class="nav-label"><span>⏳</span>Memory Vault</label>
     </div>
 
     <!-- PANEL 1: HEALTH LOGS -->
-    <div id="medical" class="panel active">
+    <div id="medical" class="panel">
         <h2>💊 Health & Daily Prescriptions</h2>
         <form onsubmit="return false;">
             <div class="form-group">
@@ -117,7 +129,7 @@
         </form>
     </div>
 
-    <!-- PANEL 2: HOME SAFETY & DOWNSIZING -->
+    <!-- PANEL 2: HOME SAFETY & LOGISTICS -->
     <div id="logistics" class="panel">
         <h2>🏡 Household Logistics & Downsizing</h2>
         <form onsubmit="return false;">
@@ -128,9 +140,3 @@
             </div>
             
             <label style="display:block; font-size:14px; font-weight:600; margin-bottom:4px;">Transition & Sorting Checklist</label>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Track organizational progressions sequentially to simplify living transitions.</p>
-            
-            <div class="list-item">
-                <input type="checkbox" id="log_1" onchange="localStorage.setItem('log_1', this.checked)">
-                <div class="list-item-content">
-                    <div class="list-item-title">The Cookware & Comfort Edit</div>
