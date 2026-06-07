@@ -28,7 +28,7 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* CSS Tab Switcher Toggles */
+        /* CRITICAL PURE CSS ARCHITECTURE: MUST WRAP CONTENT TO ALLOW SELECTION */
         .tab-state { display: none; }
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
         
@@ -37,13 +37,13 @@
 
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         
-        /* Interactive Nav Highlighting Rules */
+        /* Enforced Visual Highlighting Styles */
         #tab1:checked ~ .nav-grid label[for="tab1"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
         #tab2:checked ~ .nav-grid label[for="tab2"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
         #tab3:checked ~ .nav-grid label[for="tab3"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
         #tab4:checked ~ .nav-grid label[for="tab4"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
-        /* Panel Swapping Actions */
+        /* Enforced Panel Display Styles */
         #tab1:checked ~ #medical,
         #tab2:checked ~ #logistics,
         #tab3:checked ~ #dementia,
@@ -55,15 +55,19 @@
         #dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         #legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Layout Forms */
+        /* Highly Resourceful Layout Modules */
         .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
         .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
-        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; }
+        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; resize: vertical; }
         textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
         
+        /* Interactive Checkbox Collections */
         .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
         .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
+        .list-item-content { flex-grow: 1; }
+        .list-item-title { font-weight: 600; font-size: 15px; color: var(--text-main); }
+        .list-item-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
 
         .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
         #medical .btn { background: var(--accent-medical); color: white; }
@@ -87,13 +91,13 @@
         <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This system uses native hardware execution layers, completely isolating sensitive notes from cloud data tracking.
     </div>
 
-    <!-- State Controllers -->
+    <!-- CRITICAL ALIGNMENT: RADIO BUTTONS MUST BE SIBLINGS DIRECTLY ABOVE THE CHANNELS -->
     <input type="radio" id="tab1" name="companion-tabs" class="tab-state" checked>
     <input type="radio" id="tab2" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab3" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab4" name="companion-tabs" class="tab-state">
 
-    <!-- Active Grid Controls -->
+    <!-- Active Grid Row Layout Links -->
     <div class="nav-grid">
         <label for="tab1" class="nav-label"><span>💊</span>Health Logs</label>
         <label for="tab2" class="nav-label"><span>🏡</span>Home Safety</label>
@@ -107,15 +111,18 @@
         <form onsubmit="return false;">
             <div class="form-group">
                 <label>Daily Medications, Exact Times & Dosages</label>
-                <textarea id="meds-list" rows="5" placeholder="e.g.,&#10;• Morning (8:00 AM) with food: Donepezil 10mg" oninput="localStorage.setItem('meds-list', this.value)"></textarea>
+                <p>Track scheduling maps cleanly for physician checkups or home nursing handoffs.</p>
+                <textarea id="meds-list" rows="5" placeholder="e.g.,&#10;• Morning (8:00 AM) with food: Donepezil 10mg&#10;• Afternoon (1:00 PM): Nutritional physical vitamins" oninput="localStorage.setItem('meds-list', this.value)"></textarea>
             </div>
             <div class="form-group">
-                <label>Our Care Circle Contact Log</label>
-                <textarea id="medical-contacts" rows="3" placeholder="e.g., Dr. Aris (Neurology): 555-0199" oninput="localStorage.setItem('medical-contacts', this.value)"></textarea>
+                <label>Medical Professional & Emergency Contact Network</label>
+                <p>Keep account listings, provider numbers, and hospital phone parameters unified here.</p>
+                <textarea id="medical-contacts" rows="3" placeholder="e.g., Primary Care: Dr. Aris (555-0199) | Local Pharmacy: CVS Line (555-0234)" oninput="localStorage.setItem('medical-contacts', this.value)"></textarea>
             </div>
             <div class="form-group">
-                <label>Routine Vitals Tracker</label>
-                <textarea id="vitals-log" rows="4" placeholder="e.g., Monday AM: Blood Pressure 120/82" oninput="localStorage.setItem('vitals-log', this.value)"></textarea>
+                <label>Routine Vitals Tracker (Blood Pressure, Sugar, Temperature)</label>
+                <p>A simple dashboard field to capture metrics before clinic visits.</p>
+                <textarea id="vitals-log" rows="4" placeholder="e.g., Monday AM: Blood Pressure 122/80 | Pulse: 72" oninput="localStorage.setItem('vitals-log', this.value)"></textarea>
             </div>
             <button type="button" class="btn" onclick="alert('✨ Saved locally to device storage!')">Save Health Records</button>
         </form>
@@ -126,28 +133,9 @@
         <h2>🏡 Household Logistics & Downsizing</h2>
         <form onsubmit="return false;">
             <div class="form-group">
-                <label>Essential House Anchors (The Scavenger Hunt)</label>
-                <textarea id="infrastructure-map" rows="4" placeholder="e.g., Main Water Shut-off: Basement back wall..." oninput="localStorage.setItem('infrastructure-map', this.value)"></textarea>
+                <label>Essential House Infrastructure Map (The Scavenger Hunt)</label>
+                <p>Document vital utility settings so emergency helpers or family relatives aren't searching blindly.</p>
+                <textarea id="infrastructure-map" rows="4" placeholder="e.g.,&#10;• Main Water Shut-off: Basement back wall, red wheel valve.&#10;• Electrical Panel Box: Garage panel behind shelving units.&#10;• Wi-Fi Network credentials: Name: HomeBase / Pass: familycomfort" oninput="localStorage.setItem('infrastructure-map', this.value)"></textarea>
             </div>
             
             <label style="display:block; font-size:14px; font-weight:600; margin-bottom:4px;">Transition & Sorting Checklist</label>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Track organizational updates down the list.</p>
-            
-            <div class="list-item">
-                <input type="checkbox" id="log_1" onchange="localStorage.setItem('log_1', this.checked)">
-                <div class="list-item-content">
-                    <div class="list-item-title">The Cookware & Comfort Edit</div>
-                    <div class="list-item-desc">Keep their most familiar cup, then donate repetitive duplicates to clear workspace clutter.</div>
-                </div>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" id="log_2" onchange="localStorage.setItem('log_2', this.checked)">
-                <div class="list-item-content">
-                    <div class="list-item-title">The Secure Document Audit</div>
-                    <div class="list-item-desc">Safely shred legacy house utility notices older than 7 years to keep filling cabinets simple.</div>
-                </div>
-            </div>
-            <div class="list-item">
-                <input type="checkbox" id="log_3" onchange="localStorage.setItem('log_3', this.checked)">
-                <div class="list-item-content">
-                    <div class="list-item-title">Keep-Sake Estate Tagging System</div>
