@@ -1,0 +1,16 @@
+{
+  "short_name": "CompanionPro",
+  "name": "Family Care Companion Pro Suite",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#f4f6f0",
+  "theme_color": "#81b29a",
+  "display": "standalone",
+  "orientation": "portrait"
+}

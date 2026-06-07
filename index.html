@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Care Companion Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(function(reg) {
+                console.log('Offline Engine Engaged Successfully.');
+            }).catch(function(err) {
+                console.error('Offline Engine Failed to Boot:', err);
+            });
+        }
+    </script>
+    <style>
+        :root {
+            --bg-main: #f4f6f0;         
+            --bg-card: #ffffff;         
+            --bg-input: #fafafa;        
+            --text-main: #2d3732;       
+            --text-muted: #6b7c73;      
+            --accent-medical: #e07a5f;   
+            --accent-logistics: #81b29a;  
+            --accent-dementia: #60a5fa;   
+            --accent-legacy: #f4a261;     
+            --border: #e2e8e4;           
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); padding: 20px 15px; font-size: 16px; line-height: 1.6; }
+        .container { max-width: 750px; margin: 0 auto; padding-bottom: 60px; }
+
+        header { text-align: center; margin-bottom: 25px; padding: 25px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(45,55,50,0.03); }
+        header h1 { font-size: 26px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; letter-spacing: -0.5px; }
+        header p { color: var(--text-muted); font-size: 14px; font-style: italic; }
+
+        .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; line-height: 1.5; }
+
+        /* Navigation Grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
+        .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; }
+        .nav-btn span { font-size: 18px; }
+        
+        /* Direct Active Tab Overrides */
+        .nav-btn.active[data-tab="medical"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
+        .nav-btn.active[data-tab="logistics"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
+        .nav-btn.active[data-tab="dementia"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
+        .nav-btn.active[data-tab="legacy"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
+
+        /* Panel Visibility */
+        .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .panel.active { display: block !important; }
+        
+        h2 { font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); color: var(--text-main); font-weight: 700; }
+        .panel[id="medical"] h2 { border-color: var(--accent-medical); }
+        .panel[id="logistics"] h2 { border-color: var(--accent-logistics); }
+        .panel[id="dementia"] h2 { border-color: var(--accent-dementia); }
+        .panel[id="legacy"] h2 { border-color: var(--accent-legacy); }
+
+        /* Structural Controls */
+        .form-group { margin-bottom: 22px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
+        input[type="text"], textarea { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; transition: all 0.2s; }
+        input:focus, textarea:focus { outline: none; border-color: var(--text-muted); background: white; }
+        
+        /* Checkbox Rows */
+        .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
+        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
+        .list-item-content { flex-grow: 1; }
+        .list-item-title { font-weight: 600; font-size: 15px; color: var(--text-main); }
+        .list-item-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+        /* Premium Actions */
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .btn:hover { opacity: 0.95; transform: translateY(-1px); }
+        .panel[id="medical"] .btn { background: var(--accent-medical); color: white; }
+        .panel[id="logistics"] .btn { background: var(--accent-logistics); color: white; }
+        .panel[id="dementia"] .btn { background: var(--accent-dementia); color: white; }
+        .panel[id="legacy"] .btn { background: var(--accent-legacy); color: white; }
+
+        /* Hardware Security Management Drawer */
+        .backup-tray { background: var(--bg-card); border: 1px dashed var(--border); padding: 16px; border-radius: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn-utility { background: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; }
+        .btn-utility:hover { background: #e2e8e4; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Family Care Companion</h1>
+        <p>🔒 Secure Offline Workspace • No Accounts Required</p>
+    </header>
+
+    <div class="welcome-banner">
+        <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This software tool runs completely locally on your machine, protecting sensitive information from the cloud while keeping logs fluid and clear.
+    </div>
+
+    <!-- Navigation Core Layout -->
+    <div class="nav-grid">
+        <button class="nav-btn active" data-tab="medical" onclick="switchTab('medical')"><span>💊</span>Health Logs</button>
+        <button class="nav-btn" data-tab="logistics" onclick="switchTab('logistics')"><span>🏡</span>Home Safety</button>
+        <button class="nav-btn" data-tab="dementia" onclick="switchTab('dementia')"><span>🧠</span>Gentle Care</button>
+        <button class="nav-btn" data-tab="legacy" onclick="switchTab('legacy')"><span>⏳</span>Memory Vault</button>
+    </div>
+
+    <!-- TAB 1: MEDICAL MODULE -->
+    <div id="medical" class="panel active">
+        <h2>💊 Health & Daily Prescriptions</h2>
+        <form onsubmit="return false;">
+            <div class="form-group">
+                <label>Daily Medications, Exact Times & Dosages</label>
+                <p>Track prescription management details cleanly for physicians or morning handoffs.</p>
+                <textarea id="meds-list" rows="5" placeholder="e.g.,&#10;• Morning (8:00 AM) with food: Donepezil 10mg&#10;• Evening (7:00 PM): Blood pressure wellness supports"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Our Care Circle Contact Log</label>
+                <p>Crucial mobile phone details or location lines you can tap into immediately in a hurry.</p>
+                <textarea id="medical-contacts" rows="3" placeholder="e.g., Dr. Aris (Neurology): 555-0199 | Local Pharmacy: 555-0234 | Neighbor Sarah: 555-9821"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Routine Vitals Tracker</label>
+                <p>Note baseline trends, sugar records, or overall mood to track well-being histories.</p>
+                <textarea id="vitals-log" rows="4" placeholder="e.g.,&#10;Monday AM: Blood Pressure 120/82 | Feeling bright and energetic today."></textarea>
+            </div>
+            <button type="button" class="btn" onclick="saveData('medical')">Save Health Records</button>
+        </form>
+    </div>
+
+    <!-- TAB 2: DOWNSIZING LOGISTICS -->
+    <div id="logistics" class="panel">
+        <h2>🏡 Household Logistics & Downsizing</h2>
+        <form onsubmit="return false;">
+            <div class="form-group">
+                <label>Essential House Anchors (The Scavenger Hunt)</label>
+                <p>Where are non-legal essentials kept? Save this so emergency helpers aren't searching blindly.</p>
+                <textarea id="infrastructure-map" rows="4" placeholder="e.g.,&#10;• Main Water Shut-off: Basement back wall, look for red wheel.&#10;• Spare House Keys: Key lockbox on back porch pillar (Code: 4821)&#10;• Wi-Fi Connection Details: Network: HomeWiFi / Password: familycomfort2026"></textarea>
+            </div>
+            
+            <label style="display:block; font-size:14px; font-weight:600; margin-bottom:4px;">Transition & Sorting Checklist</label>
