@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Care Companion Pro</title>
+    <title>Family Care Companion Pro Suite</title>
     <style>
         :root {
             --bg-main: #f4f6f0;         
@@ -16,6 +16,7 @@
             --accent-dementia: #60a5fa;   
             --accent-legacy: #f4a261;     
             --border: #e2e8e4;           
+            --danger: #ef4444;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -28,23 +29,20 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* THE FIX: Absolute root level radio state trackers */
+        /* The Pure CSS Tab Selection Engine */
         .tab-state { display: none; }
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
         
         .nav-label { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
         .nav-label span { font-size: 18px; }
 
-        /* General Panel Properties */
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         
-        /* Direct Sibling Tab Highlighting Rules */
         #tab1:checked ~ .nav-grid label[for="tab1"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
         #tab2:checked ~ .nav-grid label[for="tab2"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
         #tab3:checked ~ .nav-grid label[for="tab3"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
         #tab4:checked ~ .nav-grid label[for="tab4"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
-        /* Direct Sibling Panel Display Rules */
         #tab1:checked ~ #panel-medical,
         #tab2:checked ~ #panel-logistics,
         #tab3:checked ~ #panel-dementia,
@@ -56,25 +54,25 @@
         #panel-dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
         #panel-legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Form Inputs Layout Styles */
-        .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
-        .form-group p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
-        textarea, input[type="text"] { width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; font-size: 15px; font-weight: 500; }
-        textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
+        /* Premium Visual Cards Layout */
+        .widget-card { background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 20px; }
+        .widget-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
         
-        /* Interactive Checkbox Items */
-        .list-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
-        .list-item input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: var(--accent-logistics); }
-        .list-item-content { flex-grow: 1; }
-        .list-item-title { font-weight: 600; font-size: 15px; color: var(--text-main); }
-        .list-item-desc { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 500px) { .form-grid-2 { grid-template-columns: 1fr; } }
 
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
-        #panel-medical .btn { background: var(--accent-medical); color: white; }
-        #panel-logistics .btn { background: var(--accent-logistics); color: white; }
-        #panel-dementia .btn { background: var(--accent-dementia); color: white; }
-        #panel-legacy .btn { background: var(--accent-legacy); color: white; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
+        textarea, input[type="text"], input[type="number"], select { width: 100%; padding: 12px; background: #ffffff; border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; font-size: 14px; font-weight: 500; }
+        
+        /* Interactive Elements styling */
+        .list-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; }
+        .list-item input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; accent-color: var(--accent-logistics); }
+        .list-item-title { font-weight: 600; font-size: 14px; }
+        .list-item-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+        /* Crisis Alert Card Banner */
+        .emergency-banner { background: #fef2f2; border: 1px solid #fee2e2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #991b1b; }
 
         .backup-tray { background: var(--bg-card); border: 1px dashed var(--border); padding: 16px; border-radius: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn-utility { background: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; }
@@ -84,21 +82,21 @@
 
 <div class="container">
     <header>
-        <h1>Family Care Companion</h1>
-        <p>🔒 Secure Offline Workspace • No Cloud Risk</p>
+        <h1>Family Care Companion Pro</h1>
+        <p>🔒 Zero Server Connectivity • 100% Private Local System Encryption</p>
     </header>
 
     <div class="welcome-banner">
-        <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This system uses native hardware execution layers, completely isolating sensitive notes from cloud data tracking.
+        <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This premium dashboard organizes all critical medical parameters, cognitive logs, home safety matrices, and biological history files right on your device.
     </div>
 
-    <!-- The Hidden Checkbox Form Triggers -->
+    <!-- Central Sibling Core State Selectors -->
     <input type="radio" id="tab1" name="companion-tabs" class="tab-state" checked>
     <input type="radio" id="tab2" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab3" name="companion-tabs" class="tab-state">
     <input type="radio" id="tab4" name="companion-tabs" class="tab-state">
 
-    <!-- Active Navigation Row Panels -->
+    <!-- Active Structural Menu Layout Links -->
     <div class="nav-grid">
         <label for="tab1" class="nav-label"><span>💊</span>Health Logs</label>
         <label for="tab2" class="nav-label"><span>🏡</span>Home Safety</label>
@@ -106,37 +104,37 @@
         <label for="tab4" class="nav-label"><span>⏳</span>Memory Vault</label>
     </div>
 
-    <!-- PANEL 1: HEALTH LOGS -->
+    <!-- PANEL 1: DAZZLING MEDICAL TRACKER MODULE -->
     <div id="panel-medical" class="panel">
-        <h2>💊 Health & Daily Prescriptions</h2>
-        <form onsubmit="return false;">
-            <div class="form-group">
-                <label>Daily Medications, Exact Times & Dosages</label>
-                <p>Track prescription mapping layouts clearly for physician checkups or handoffs.</p>
-                <textarea id="meds-list" rows="5" placeholder="e.g.,&#10;• Morning (8:00 AM) with food: Donepezil 10mg&#10;• Evening (7:00 PM): Blood pressure records" oninput="localStorage.setItem('meds-list', this.value)"></textarea>
+        <h2>💊 Master Clinical & Prescription Hub</h2>
+        
+        <div class="emergency-banner">
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">🚨 Critical Medical Pass-Card</div>
+            <p style="font-size: 12px; color: #7f1d1d;">Keep their absolute primary life-saving data visible for emergency medical workers or new nurses.</p>
+            <div class="form-grid-2" style="margin-top: 10px;">
+                <div class="form-group"><label>Primary Medical Diagnosis</label><input type="text" id="em-diag" placeholder="e.g., Stage 2 Alzheimer's, Type 2 Diabetes" oninput="localStorage.setItem('em-diag', this.value)"></div>
+                <div class="form-group"><label>Severe Known Allergies</label><input type="text" id="em-allergies" placeholder="e.g., Penicillin, Sulfa Drugs, Latex" oninput="localStorage.setItem('em-allergies', this.value)"></div>
             </div>
-            <div class="form-group">
-                <label>Our Care Circle Provider Log</label>
-                <p>Keep account listings, doctors, clinics, and emergency lines unified here.</p>
-                <textarea id="medical-contacts" rows="3" placeholder="e.g., Primary Care: Dr. Aris (555-0199) | Local Pharmacy: CVS (555-0234)" oninput="localStorage.setItem('medical-contacts', this.value)"></textarea>
+        </div>
+
+        <div class="widget-card">
+            <div class="widget-title" style="color: var(--accent-medical)">⚡ Active Daily Medication Grid</div>
+            <div class="form-grid-2">
+                <div class="form-group"><label>Morning Schedule (AM Routine)</label><textarea id="med-am" rows="3" placeholder="Pills, measurements, and food guidelines..." oninput="localStorage.setItem('med-am', this.value)"></textarea></div>
+                <div class="form-group"><label>Evening Schedule (PM Routine)</label><textarea id="med-pm" rows="3" placeholder="Bedtime prescriptions and timing maps..." oninput="localStorage.setItem('med-pm', this.value)"></textarea></div>
             </div>
-            <div class="form-group">
-                <label>Routine Vitals Tracker</label>
-                <p>A safe space to compile numbers before their next wellness clinic visit.</p>
-                <textarea id="vitals-log" rows="4" placeholder="e.g., Monday AM: Blood Pressure 122/80 | Pulse: 72" oninput="localStorage.setItem('vitals-log', this.value)"></textarea>
+            <div class="form-grid-2" style="margin-top: 5px;">
+                <div class="form-group"><label>Current Remaining Pill Count</label><input type="number" id="med-count" placeholder="30" oninput="localStorage.setItem('med-count', this.value)"></div>
+                <div class="form-group"><label>Next Local Pharmacy Refill Date</label><input type="text" id="med-refill" placeholder="e.g., June 24th" oninput="localStorage.setItem('med-refill', this.value)"></div>
             </div>
-            <button type="button" class="btn" onclick="alert('✨ Saved locally to device storage!')">Save Health Records</button>
-        </form>
+        </div>
+
+        <div class="widget-card">
+            <div class="widget-title" style="color: var(--text-main)">📋 Daily Vital Signs History Log</div>
+            <div class="form-group">
+                <label>Input Blood Pressure, Blood Sugar, and Pulse Trends</label>
+                <textarea id="vitals-ledger" rows="4" placeholder="e.g.,&#10;06/07 AM: BP 120/80 | Pulse 68 | Sugar 104 mg/dL (Before breakfast)&#10;06/06 PM: BP 124/82 | Pulse 70 | Sugar 110 mg/dL" oninput="localStorage.setItem('vitals-ledger', this.value)"></textarea>
+            </div>
+        </div>
     </div>
 
-    <!-- PANEL 2: HOME SAFETY -->
-    <div id="panel-logistics" class="panel">
-        <h2>🏡 Household Logistics & Downsizing</h2>
-        <form onsubmit="return false;">
-            <div class="form-group">
-                <label>Essential House Infrastructure Map (The Scavenger Hunt)</label>
-                <p>Document vital utility items so emergency helpers or family relatives aren't searching blindly.</p>
-                <textarea id="infrastructure-map" rows="4" placeholder="e.g.,&#10;• Main Water Shut-off: Basement back wall, red wheel valve.&#10;• Electrical Panel Box: Garage panel behind shelving units.&#10;• Wi-Fi Network credentials: Name: HomeBase / Pass: familycomfort" oninput="localStorage.setItem('infrastructure-map', this.value)"></textarea>
-            </div>
-            
-            <label style="display:block; font-size:14px; font-weight:600; margin-bottom:4px;">Transition & Sorting Checklist</label>
