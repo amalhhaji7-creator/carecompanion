@@ -29,49 +29,45 @@
 
         .welcome-banner { background: #eaf2ee; border-left: 4px solid var(--accent-logistics); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; color: #3b5245; }
 
-        /* The Pure CSS Tab Selection Engine */
-        .tab-state { display: none; }
+        /* Stable Grid Navigation Bar */
         .nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 25px; }
+        .nav-btn { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
+        .nav-btn span { font-size: 18px; }
         
-        .nav-label { padding: 14px 4px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); border-radius: 12px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; text-align: center; }
-        .nav-label span { font-size: 18px; }
+        /* Active Tab Accent Classes */
+        .nav-btn.active[data-tab="medical"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
+        .nav-btn.active[data-tab="logistics"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
+        .nav-btn.active[data-tab="dementia"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
+        .nav-btn.active[data-tab="legacy"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
 
+        /* Content Containers */
         .panel { display: none; background: var(--bg-card); padding: 28px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         
-        #tab1:checked ~ .nav-grid label[for="tab1"] { background: var(--accent-medical) !important; color: white !important; border-color: var(--accent-medical) !important; }
-        #tab2:checked ~ .nav-grid label[for="tab2"] { background: var(--accent-logistics) !important; color: white !important; border-color: var(--accent-logistics) !important; }
-        #tab3:checked ~ .nav-grid label[for="tab3"] { background: var(--accent-dementia) !important; color: white !important; border-color: var(--accent-dementia) !important; }
-        #tab4:checked ~ .nav-grid label[for="tab4"] { background: var(--accent-legacy) !important; color: white !important; border-color: var(--accent-legacy) !important; }
-
-        #tab1:checked ~ #panel-medical,
-        #tab2:checked ~ #panel-logistics,
-        #tab3:checked ~ #panel-dementia,
-        #tab4:checked ~ #panel-legacy { display: block !important; }
-
         h2 { font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); font-weight: 700; }
-        #panel-medical h2 { border-color: var(--accent-medical); color: var(--accent-medical); }
-        #panel-logistics h2 { border-color: var(--accent-logistics); color: var(--accent-logistics); }
-        #panel-dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
-        #panel-legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
+        #medical h2 { border-color: var(--accent-medical); color: var(--accent-medical); }
+        #logistics h2 { border-color: var(--accent-logistics); color: var(--accent-logistics); }
+        #dementia h2 { border-color: var(--accent-dementia); color: var(--accent-dementia); }
+        #legacy h2 { border-color: var(--accent-legacy); color: var(--accent-legacy); }
 
-        /* Premium Visual Cards Layout */
+        /* Interactive Card Blocks */
         .widget-card { background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 20px; }
         .widget-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
         
-        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        @media (max-width: 500px) { .form-grid-2 { grid-template-columns: 1fr; } }
+        .form-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (max-width: 550px) { .form-grid-2 { grid-template-columns: 1fr; } }
 
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
-        textarea, input[type="text"], input[type="number"], select { width: 100%; padding: 12px; background: #ffffff; border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; font-size: 14px; font-weight: 500; }
+        textarea, input[type="text"], input[type="number"] { width: 100%; padding: 12px; background: #ffffff; border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; font-size: 14px; font-weight: 500; }
+        textarea:focus, input:focus { outline: none; border-color: var(--text-muted); background: white; }
         
-        /* Interactive Elements styling */
+        /* Checklist Rows */
         .list-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; }
         .list-item input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; accent-color: var(--accent-logistics); }
-        .list-item-title { font-weight: 600; font-size: 14px; }
+        .list-item-content { flex-grow: 1; }
+        .list-item-title { font-weight: 600; font-size: 14px; color: var(--text-main); }
         .list-item-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
-        /* Crisis Alert Card Banner */
         .emergency-banner { background: #fef2f2; border: 1px solid #fee2e2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #991b1b; }
 
         .backup-tray { background: var(--bg-card); border: 1px dashed var(--border); padding: 16px; border-radius: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -82,30 +78,24 @@
 
 <div class="container">
     <header>
-        <h1>Family Care Companion Pro</h1>
-        <p>🔒 Zero Server Connectivity • 100% Private Local System Encryption</p>
+        <h1>Family Care Companion</h1>
+        <p>🔒 Secure Offline Workspace • No Cloud Risk</p>
     </header>
 
     <div class="welcome-banner">
-        <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This premium dashboard organizes all critical medical parameters, cognitive logs, home safety matrices, and biological history files right on your device.
+        <strong>Hello Caregiver, take a gentle breath. 🤍</strong> This system uses native hardware execution layers, completely isolating sensitive notes from cloud data tracking.
     </div>
 
-    <!-- Central Sibling Core State Selectors -->
-    <input type="radio" id="tab1" name="companion-tabs" class="tab-state" checked>
-    <input type="radio" id="tab2" name="companion-tabs" class="tab-state">
-    <input type="radio" id="tab3" name="companion-tabs" class="tab-state">
-    <input type="radio" id="tab4" name="companion-tabs" class="tab-state">
-
-    <!-- Active Structural Menu Layout Links -->
+    <!-- Unified Menu Navigation Buttons -->
     <div class="nav-grid">
-        <label for="tab1" class="nav-label"><span>💊</span>Health Logs</label>
-        <label for="tab2" class="nav-label"><span>🏡</span>Home Safety</label>
-        <label for="tab3" class="nav-label"><span>🧠</span>Gentle Care</label>
-        <label for="tab4" class="nav-label"><span>⏳</span>Memory Vault</label>
+        <button type="button" class="nav-btn active" data-tab="medical" onclick="switchTab('medical')"><span>💊</span>Health Logs</button>
+        <button type="button" class="nav-btn" data-tab="logistics" onclick="switchTab('logistics')"><span>🏡</span>Home Safety</button>
+        <button type="button" class="nav-btn" data-tab="dementia" onclick="switchTab('dementia')"><span>🧠</span>Gentle Care</button>
+        <button type="button" class="nav-btn" data-tab="legacy" onclick="switchTab('legacy')"><span>⏳</span>Memory Vault</button>
     </div>
 
-    <!-- PANEL 1: DAZZLING MEDICAL TRACKER MODULE -->
-    <div id="panel-medical" class="panel">
+    <!-- TAB 1: MEDICAL RE-ENGINEERED CONTAINER -->
+    <div id="medical" class="panel" style="display: block;">
         <h2>💊 Master Clinical & Prescription Hub</h2>
         
         <div class="emergency-banner">
@@ -113,7 +103,7 @@
             <p style="font-size: 12px; color: #7f1d1d;">Keep their absolute primary life-saving data visible for emergency medical workers or new nurses.</p>
             <div class="form-grid-2" style="margin-top: 10px;">
                 <div class="form-group"><label>Primary Medical Diagnosis</label><input type="text" id="em-diag" placeholder="e.g., Stage 2 Alzheimer's, Type 2 Diabetes" oninput="localStorage.setItem('em-diag', this.value)"></div>
-                <div class="form-group"><label>Severe Known Allergies</label><input type="text" id="em-allergies" placeholder="e.g., Penicillin, Sulfa Drugs, Latex" oninput="localStorage.setItem('em-allergies', this.value)"></div>
+                <div class="form-group"><label>Severe Known Allergies</label><input type="text" id="em-allergies" placeholder="e.g., Penicillin, Latex" oninput="localStorage.setItem('em-allergies', this.value)"></div>
             </div>
         </div>
 
@@ -130,11 +120,18 @@
         </div>
 
         <div class="widget-card">
-            <div class="widget-title" style="color: var(--text-main)">📋 Daily Vital Signs History Log</div>
+            <div class="widget-title">📋 Daily Vital Signs History Log</div>
             <div class="form-group">
-                <label>Input Blood Pressure, Blood Sugar, and Pulse Trends</label>
-                <textarea id="vitals-ledger" rows="4" placeholder="e.g.,&#10;06/07 AM: BP 120/80 | Pulse 68 | Sugar 104 mg/dL (Before breakfast)&#10;06/06 PM: BP 124/82 | Pulse 70 | Sugar 110 mg/dL" oninput="localStorage.setItem('vitals-ledger', this.value)"></textarea>
+                <textarea id="vitals-ledger" rows="4" placeholder="06/07 AM: BP 120/80 | Pulse 68" oninput="localStorage.setItem('vitals-ledger', this.value)"></textarea>
             </div>
         </div>
     </div>
 
+    <!-- TAB 2: LOGISTICS RE-ENGINEERED CONTAINER -->
+    <div id="logistics" class="panel">
+        <h2>🏡 Household Logistics & Downsizing</h2>
+        
+        <div class="widget-card">
+            <div class="widget-title" style="color: var(--accent-logistics)">🗺️ Property Asset Scavenger Hunt</div>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Map out critical infrastructure settings so emergency helpers aren't searching blindly.</p>
+            <div class="form-grid-2">
